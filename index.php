@@ -20,9 +20,9 @@ function add_custom_route_script() {
     $formId = isset($_GET['donationFormID']) ?  abs($_GET['donationFormID']) : null;
 
     wp_localize_script('conversion-bridge-givewp', 'conversionBridgeSettings', [
-        'conversionBridgeTrackingEnabled' =>  give()->form_meta->get_meta($formId, 'conversionBridgeTrackingEnabled', true),
-        'conversionBridgeTrackingLabel' =>  give()->form_meta->get_meta($formId, 'conversionBridgeTrackingLabel', true),
-        'conversionBridgeTrackingId' =>  give()->form_meta->get_meta($formId, 'conversionBridgeTrackingId', true)
+        'conversionBridgeTrackingEnabled' =>  give()->form_meta->get_meta($formId, 'conversion_bridge_tracking_enabled', true),
+        'conversionBridgeTrackingLabel' =>  give()->form_meta->get_meta($formId, 'conversion_bridge_tracking_label', true),
+        'conversionBridgeTrackingId' =>  give()->form_meta->get_meta($formId, 'conversion_bridge_tracking_id', true)
     ]);
 }
 
@@ -33,17 +33,17 @@ add_action('givewp_form_builder_updated', function($form) {
 
         if (isset($settings['conversionBridgeTrackingEnabled'])){
             $conversionBridgeTrackingEnabled = give_clean($settings['conversionBridgeTrackingEnabled']);
-            give()->form_meta->update_meta($formId, 'conversionBridgeTrackingEnabled', $conversionBridgeTrackingEnabled);
+            give()->form_meta->update_meta($formId, 'conversion_bridge_tracking_enabled', $conversionBridgeTrackingEnabled);
         }
 
         if (isset($settings['conversionBridgeTrackingLabel'])){
             $conversionBridgeTrackingLabel = give_clean($settings['conversionBridgeTrackingLabel']);
-            give()->form_meta->update_meta($formId, 'conversionBridgeTrackingLabel', $conversionBridgeTrackingLabel);
+            give()->form_meta->update_meta($formId, 'conversion_bridge_tracking_label', $conversionBridgeTrackingLabel);
         }
 
         if (isset($settings['conversionBridgeTrackingId'])){
             $conversionBridgeTrackingId = give_clean($settings['conversionBridgeTrackingId']);
-            give()->form_meta->update_meta($formId, 'conversionBridgeTrackingId', $conversionBridgeTrackingId);
+            give()->form_meta->update_meta($formId, 'conversion_bridge_tracking_id', $conversionBridgeTrackingId);
         }
     }
 });
