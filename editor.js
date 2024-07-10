@@ -6,18 +6,18 @@
 
 	// Define the new component for the conversion tracking tab
 	const ConversionTrackingTab = ({ settings, setSettings }) => {
-		const { conversionTrackingEnabled, conversionLabel, googleConversionTrackingId } = settings;
+		const { conversionBridgeTrackingEnabled = false, conversionBridgeTrackingLabel = '', conversionBridgeTrackingId } = {...window.conversionBridgeSettings, ...settings};
 
 		const handleToggleChange = () => {
-			setSettings({ ...settings, conversionTrackingEnabled: !conversionTrackingEnabled });
+			setSettings({ ...settings, conversionBridgeTrackingEnabled: !conversionBridgeTrackingEnabled });
 		};
 
-		const handleConversionLabelChange = (conversionLabel) => {
-			setSettings({ ...settings, conversionLabel });
+		const handleConversionBridgeTrackingLabelChange = (conversionBridgeTrackingLabel) => {
+			setSettings({ ...settings, conversionBridgeTrackingLabel });
 		};
 
-		const handleGoogleTrackingIdChange = (googleConversionTrackingId) => {
-			setSettings({ ...settings, googleConversionTrackingId });
+		const handleGoogleTrackingIdChange = (conversionBridgeTrackingId) => {
+			setSettings({ ...settings, conversionBridgeTrackingId });
 		};
 
 		return createElement(
@@ -28,11 +28,11 @@
 				{ className: 'no-extra-gap' },
 				createElement(ToggleControl, {
 					label: __('Enable conversion tracking', 'give'),
-					checked: conversionTrackingEnabled,
+					checked: conversionBridgeTrackingEnabled,
 					onChange: handleToggleChange,
 				})
 			),
-			conversionTrackingEnabled && createElement(
+			conversionBridgeTrackingEnabled && createElement(
 				Fragment,
 				null,
 				createElement(
@@ -40,8 +40,8 @@
 					null,
 					createElement(TextControl, {
 						label: __('Conversion Label', 'give'),
-						value: conversionLabel,
-						onChange: handleConversionLabelChange,
+						value: conversionBridgeTrackingLabel,
+						onChange: handleConversionBridgeTrackingLabelChange,
 					})
 				),
 				createElement(
@@ -49,7 +49,7 @@
 					null,
 					createElement(TextControl, {
 						label: __('Google Conversion Tracking ID', 'give'),
-						value: googleConversionTrackingId,
+						value: conversionBridgeTrackingId,
 						onChange: handleGoogleTrackingIdChange,
 					})
 				)
